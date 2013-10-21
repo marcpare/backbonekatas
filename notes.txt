@@ -1,3 +1,84 @@
+
+Next up:
+(filtering to completed)
+(stats box)
+
+2013-10-21
+
+Now I'm building it up one feature at a time, trying to add only the code that supports that feature.
+
+First: the adding a TODO
+Then,
+* editing a todo
+  - did an edit, doesn't show till page refresh
+* delete a todo
+* check off a todo
+* mark all as complete
+  
+  
+Why do you have some of the events as object-level (prototype-level?) properties,
+then, some added later in initialize?
+
+What events go where?
+
+The source says `listenTo` is an inversion of control of `on`. Does that mean
+that listenTo is for when you want another object's events?
+
+  events: {
+    'dblclick label': 'edit',
+    'blur .edit': 'close',
+    'keypress .edit': 'updateOnEnter'
+  },
+  initialize: function(){
+    this.listenTo(this.model, 'change', this.render);
+  }
+
+***
+
+Initialize a property as an empty dictionary:
+
+`var listeningTo = this._listeningTo || (this._listeningTo = {});`
+
+Works with any default value:
+
+`var id = obj._listenId || (obj._listenId = _.uniqueId('l'));`
+
+***
+
+an idiomatic loop for traversing an array:
+(the `length` call is slow, and it would be called each iteration
+if it were part of the loop boundary statement)
+
+var i, l;
+for (i = 0, l = names.length; i < l; i++) {
+}
+
+***
+
+I tossed in a little variation here:
+
+<pre>
+app.todos.each(function(todo){
+  todo.save({'completed':completed});
+});
+</pre>
+
+<pre>
+app.todos.each(function(todo){
+  todo.set('completed', completed);
+  todo.save();
+});
+</pre>
+
+***
+
+I did the exercise this way: read the code. Flip to my editor, try to type from memory.
+Try to come up with a mental model of the methods so that you can recreate yourself.
+
+
+
+2013-10-20
+
 TODO:
 -----
 

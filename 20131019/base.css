@@ -3,3 +3,4 @@
 #todo-list .destroy:after { content: 'x'; }
 
 .hidden { display: none;  }
+.completed { text-decoration: line-through; }

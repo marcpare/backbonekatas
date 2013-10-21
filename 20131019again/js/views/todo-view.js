@@ -3,13 +3,51 @@ var app = app || {};
   app.TodoView = Backbone.View.extend({
     tagName: 'li',
     template: _.template($('#item-template').html()),
+    events: {
+      'dblclick label': 'edit',
+      'blur .edit': 'close',
+      'keypress .edit': 'updateOnEnter',
+      'click .destroy': 'clear',
+      'click .toggle': 'toggleCompleted'
+    },
+    initialize: function(){
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'destroy', this.remove);
+    },
     render: function(){
      this.$el.html(this.template(this.model.toJSON()));
+     this.$el.toggleClass('completed', this.model.get('completed'));
+     this.$input = this.$('.edit');
      this.toggleVisible();
      return this;
     },
     toggleVisible: function(){
      //this.$el.toggleClass('hidden', this.isHidden());
+    },
+    edit: function(){
+     this.$el.addClass('editing');
+     this.$input.focus();
+    },
+    close: function(){
+     var trimmedValue = this.$input.val().trim();
+     this.$input.val(trimmedValue);
+     if(trimmedValue){
+      this.model.save({title: trimmedValue});
+     }else{
+       this.clear();
+     }
+     this.$el.removeClass('editing');
+    },
+    clear: function(){
+     this.model.destroy();
+    },
+    updateOnEnter: function(e){
+     if(e.which === ENTER_KEY){
+      this.close();
+     }
+    },
+    toggleCompleted: function(){
+     this.model.toggle();
     }
   });
 })(jQuery);

@@ -8,7 +8,7 @@ var app = app || {};
     statsTemplate: _.template($('#stats-template').html()),
     events: {
       'keypress #new-todo': 'createOnEnter',
-      'click #clear-complated' : 'clearCompleted',
+      'click #clear-completed' : 'clearCompleted',
       'click #toggle-all': 'toggleAllComplete'
     },
     initialize: function(){

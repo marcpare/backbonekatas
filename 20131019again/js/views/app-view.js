@@ -4,9 +4,11 @@ var app = app || {};
     el: '#todoapp',
     statsTemplate: _.template($('#stats-template').html()),
     events: {
-     'keypress #new-todo': 'createOnEnter'
+     'keypress #new-todo': 'createOnEnter',
+     'click #toggle-all': 'toggleAllComplete'
     },
     initialize: function(){
+      this.allCheckbox = this.$('#toggle-all')[0];
       this.$main = this.$('#main');
       this.$footer = this.$('#footer');
       this.$input = this.$('#new-todo');
@@ -14,9 +16,8 @@ var app = app || {};
       this.listenTo(app.todos, 'add', this.addOne);
       this.listenTo(app.todos, 'reset', this.addAll);
       this.listenTo(app.todos, 'all', this.render);
-      
-      console.log(app.todos);
-      //app.todos.fetch({reset: true});
+
+      app.todos.fetch({reset: true});
     },
     render: function(){
       if (app.todos.length){
@@ -43,14 +44,19 @@ var app = app || {};
       };
     },
     addOne: function(todo){
-      console.log(app);
-      console.log(app.TodoView);
      var view = new app.TodoView({model: todo});
      $('#todo-list').append(view.render().el);
     },
     addAll: function(){
      this.$('#todo-list').html('');
      app.todos.each(this.addOne, this); 
+    },
+    toggleAllComplete: function(){
+      var completed = this.allCheckbox.checked;
+      app.todos.each(function(todo){
+        todo.set('completed', completed);
+        todo.save();
+      });
     }
   });
 })(jQuery);

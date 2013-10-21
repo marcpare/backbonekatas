@@ -1,0 +1,3 @@
+.edit { display: none; }
+.editing .edit { display: block } 
+.completed label { text-decoration: line-through; }
