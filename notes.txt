@@ -1,7 +1,45 @@
 
-Next up:
-(filtering to completed)
-(stats box)
+
+
+
+
+
+***
+
+2013-10-22
+
+What triggers the render event?
+
+I was reading some Haskell yesterday, and it seemed straightforward. Is "learning programming languages" a mental mode?
+
+Why does clearCompleted return false?
+
+
+Compare these two forms of the same thing.
+The mental model is: use functional constructs to contain the pattern
+of invocation (like "call an objects method for each item in a list" = invoke)
+Instead of reimplementing it.
+(wow, that is kind of opaque with words, but I can see the shape in my head easily)
+<pre>
+app.todos.each(function(todo){
+  if(todo.get('completed')){
+   todo.destroy();
+  }
+});
+
+_.invoke(app.todos.completed(), 'destroy');`
+</pre>
+
+
+why is adding the context necessary? could I delete it?
+`app.todos.each(this.filterOne, this);`
+
+I deleted it and the filtering worked fine.
+`app.todos.each(this.filterOne);`
+
+Opened an issue about it. What will happen?
+
+***
 
 2013-10-21
 
@@ -81,6 +119,10 @@ Try to come up with a mental model of the methods so that you can recreate yours
 
 TODO:
 -----
+
+/* uses apply because completed() returns a list which we want to expand */
+`return this.without.apply(this, this.completed());`
+
 
 Run JSLint
 Is there a JSLint workflow?

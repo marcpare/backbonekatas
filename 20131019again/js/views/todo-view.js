@@ -13,6 +13,7 @@ var app = app || {};
     initialize: function(){
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'destroy', this.remove);
+      this.listenTo(this.model, 'visible', this.toggleVisible);
     },
     render: function(){
      this.$el.html(this.template(this.model.toJSON()));
@@ -22,7 +23,14 @@ var app = app || {};
      return this;
     },
     toggleVisible: function(){
-     //this.$el.toggleClass('hidden', this.isHidden());
+      this.$el.toggleClass('hidden', this.isHidden());
+    },
+    isHidden: function(){
+      var isCompleted = this.model.get('completed');
+      return (
+        (!isCompleted && app.TodoFilter === 'completed') ||
+        (isCompleted && app.TodoFilter === 'active')
+      );
     },
     edit: function(){
      this.$el.addClass('editing');

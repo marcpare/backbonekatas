@@ -23,6 +23,7 @@ var app = app || {};
       this.listenTo(app.todos, 'all', this.render);
       app.todos.fetch({reset: true});
     },
+    
     render: function(){
       var completed = app.todos.completed().length;
       var remaining = app.todos.remaining().length;
