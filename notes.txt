@@ -1,7 +1,36 @@
 
+***
 
+2013-10-23
 
+It's possible to iterate through a collection in a template,
+but the TODO MVC example does not. It appends as you add elements.
 
+Setting `id: todo-app` instead of `el: #todo-app` broke the event
+binding.
+
+This is a consequence of _ensureElement
+
+> // If `this.el` is a string, pass it through `$()`, take the first
+// matching element, and re-assign it to `el`. Otherwise, create
+// an element from the `id`, `className` and `tagName` properties.
+
+Setting `this.el` looks up the element, anything else *creates*
+a new one.
+
+Initialize a hash `options || (options = {})`
+
+- Added a todo on form input. Feel like magic, no DOM manipulation
+- Added class toggling for completed items
+- Delete a todo
+- Store in local storage
+
+I was using `sync` instead of `fetch`.
+
+Next up: 
+- fetch completed class
+- delete from local storage
+- ordering counter for todos
 
 
 ***
@@ -38,6 +67,28 @@ I deleted it and the filtering worked fine.
 `app.todos.each(this.filterOne);`
 
 Opened an issue about it. What will happen?
+
+> It does because filterOne is not actually relying on the binding of this to the current object. If, however, at some point in the future the code would change and would add a dependency on this, it would break. I think keeping the context parameter around there is good style.
+
+An interesting stylistic consequence of prototypal inheritance.
+
+evening
+-------
+
+Do it from scratch, only using the docs.
+
+- Able to make a Todo model
+- Give it a view, render a template for the view
+- But got stuck trying to render a collection (got unstuck peeking at app-view.js) 
+
+A mistake I've made twice:
+
+- when constructing a View or Model, specify the properties as a dict (not args)
+
+A zen of "no look": you really want to have "the answer". There seem to be too
+many things to get right. Take it one line at a time. There is no answer, there
+are infinitely many answers (and, what you would really like, a better answer than
+the one you've got in hand)
 
 ***
 

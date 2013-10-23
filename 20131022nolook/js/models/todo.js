@@ -4,7 +4,14 @@ var app = app || {};
   var Todo = Backbone.Model.extend({
     defaults: {
       "title": "",
-      "completed": "completed"
+      "completed": ""
+    },
+    toggleCompleted: function(){
+     if(this.completed){
+       this.completed = '';
+     }else{
+       this.completed = 'completed';
+     }
     }
   });
   
