@@ -10,8 +10,12 @@ var app = app || {};
     },
     
     initialize: function(){
+      this.statsTemplate = $('#stats-template');
       this.$todos = $('#todos');
       this.listenTo(app.todos, 'add', this.addOne);
+      this.listenTo(app.todos, 'add', this.render);
+      this.listenTo(app.todos, 'change:completed', this.render);
+      this.listenTo(app.todos, 'remove', this.render);
       app.todos.fetch();
     },
     
@@ -21,6 +25,12 @@ var app = app || {};
     },
     
     render: function(){
+      var completed = app.todos.completed();
+      var stats = _.template(this.statsTemplate.html(), {
+        'completed': completed,
+        'remaining': app.todos.length - completed
+      });
+      $('#stats').html(stats);
     },
     
     toggleCompleted: function(e){

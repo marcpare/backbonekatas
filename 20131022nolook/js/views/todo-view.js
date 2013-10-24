@@ -7,12 +7,18 @@ var app = app || {};
       'click .check-completed': 'toggleCompleted',
       'click .delete': 'delete'
     },
+	  initialize: function(){
+	    if(this.model.get('completed')){
+	      this.$el.toggleClass('completed');
+	    }
+	  },
     toggleCompleted: function(){
       this.model.toggleCompleted();
+	    this.model.save();
       this.$el.toggleClass('completed');
     },
     delete: function(){
-      app.todos.remove(this.model);
+      this.model.destroy();
       this.remove();
     },
     render: function(){
