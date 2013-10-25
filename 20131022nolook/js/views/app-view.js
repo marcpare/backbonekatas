@@ -2,22 +2,19 @@ var app = app || {};
 
 (function($){
   var AppView = Backbone.View.extend({
-    
     el: '#todo-app',
-    
+    statsTemplate: _.template($('#stats-template').html()),
     events: {
       'keypress #new-todo' : 'updateOnEnter',
-      'click #toggle-all' : 'toggleAll'
+      'click #toggle-all' : 'toggleAllComplete',
+      'click #clear-completed' : 'clearCompleted'
     },
     
     initialize: function(){
-      this.statsTemplate = $('#stats-template');
       this.$todos = $('#todos');
-      this.$toggleAll = $('#toggle-all');
+      this.$toggleAll = $('#toggle-all')[0];
       this.listenTo(app.todos, 'add', this.addOne);
-      this.listenTo(app.todos, 'add', this.render);
-      this.listenTo(app.todos, 'change:completed', this.render);
-      this.listenTo(app.todos, 'remove', this.render);
+      this.listenTo(app.todos, 'all', this.render);
       app.todos.fetch();
     },
     
@@ -27,35 +24,43 @@ var app = app || {};
     },
     
     render: function(){
-      var completed = app.todos.completed();
+      var completed = app.todos.completed().length;
       if(app.todos.length == completed){
-        this.$toggleAll.addClass('completed');
-        this.$toggleAll.attr('checked', 'checked');
+        //this.$toggleAll.addClass('completed');
+        //this.$toggleAll.attr('checked', 'checked');
       }else{
-        this.$toggleAll.removeClass('completed');
-        this.$toggleAll.removeAttr('checked');
+        //this.$toggleAll.removeClass('completed');
+        //this.$toggleAll.removeAttr('checked');
       }
-      var stats = _.template(this.statsTemplate.html(), {
+      var stats = this.statsTemplate({
         'completed': completed,
         'remaining': app.todos.length - completed
       });
       $('#stats').html(stats);
     },
     
-    toggleAll: function(e){
-      this.$toggleAll.toggleClass('completed');
-      var completed = 'completed';
-      if (this.$toggleAll.attr('checked')){
-        completed = '';
-      }
-      var notCompleted = app.todos.where({completed:completed});
-      _.invoke(notCompleted, 'toggleCompleted');
+    clearCompleted: function(){
+      _.invoke(app.todos.completed(), 'destroy');
+      // prevent a page reload
+      return false;
+    },
+    
+    toggleAllComplete: function(e){
+      var completed = this.$toggleAll.checked;
+      app.todos.each(function(todo){
+        todo.save({
+          completed:completed
+        });
+      });
     },
         
     updateOnEnter: function(e){
       if (e.which == ENTER_KEY){
        var trimmedVal = $('#new-todo').val().trim();
-       var todo = new app.Todo({title:trimmedVal});
+       var todo = new app.Todo({
+         title:trimmedVal,
+         order:app.todos.nextOrder()
+       });
        app.todos.add(todo);
        todo.save();
        $('#new-todo').val('');

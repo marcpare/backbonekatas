@@ -5,17 +5,27 @@ var app = app || {};
     tagName: "li",
     events: {
       'click .check-completed': 'toggleCompleted',
-      'click .delete': 'delete'
+      'click .delete': 'delete',
+      'dblclick .todo-title' : 'openEdit',
+      'blur .edit-box' : 'closeEdit'
     },
 	  initialize: function(){
 	    if(this.model.get('completed')){
 	      this.$el.toggleClass('completed');
 	    }
       this.listenTo(this.model, 'change:completed', this.renderCompleted);
+      this.listenTo(this.model, 'destroy', this.remove);
 	  },
+    openEdit: function(){
+      this.$el.toggleClass('edit');
+      $('.edit-box', this.$el).focus();
+    },
+    closeEdit: function(){
+      this.$el.toggleClass('edit');
+    },
     renderCompleted: function(){
       this.model.save();
-      this.$el.toggleClass('completed');
+      this.$el.toggleClass('completed', this.model.get('completed'));
       this.render();
     },
     toggleCompleted: function(){
@@ -23,7 +33,6 @@ var app = app || {};
     },
     delete: function(){
       this.model.destroy();
-      this.remove();
     },
     render: function(){
       var template = $('#todo-template');

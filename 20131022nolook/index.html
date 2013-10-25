@@ -32,14 +32,19 @@
         </div>
         
         <script type="text/template" id="todo-template">
-          <input class="check-completed" type="checkbox" <% if (completed==='completed') { %> checked <% } %> />
-          <%- title %>
+          
+        <div class="todo-view">
+          <input type="checkbox" class="check-completed" <%= completed ? 'checked' : '' %>>
+          <span class="todo-title"><%- title %></span>
+          <input placeholder="<%- title %>" class="edit-box">
           <button class="delete">x</button>
+          
+          </div>
         </script>
         
         <script type="text/template" id="stats-template">
         <div>
-        Remaining <%= remaining %> | <%= completed %> completed 
+        Remaining <%= remaining %> | <%= completed %> completed <a href="" id="clear-completed">Clear Completed</a>
         </div>
         </script>
         

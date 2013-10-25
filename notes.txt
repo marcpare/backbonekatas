@@ -1,12 +1,27 @@
 
-2013-10-24
+
+2013-10-25
+
+Code review, compare to existing TodoMVC implementation 
+
+- Use ternary operator for checked
+- Cache template as object property
+- Replace multiple listens to rerender with 'all' listener
+- Get the checked state of a checkbox with `this.allCheckbox.checked`
+- The jquery id selected returns a collections, not the element
+- Using `where` on a Model doesn't make sense because properties are in `attributes`
+- Use `toggleClass` with a Boolean param (instead of trying to keep track of toggled on/toggled off)
+- Remove a view by listening to the model's destroy event rather than manually removing it when you destroy it
 
 Next up:
 
-- Input to select all <-- not working very well at all!
-
+- Edit a TODO (save the edit)
 - Filter completed
 - Filter all
+
+Review: is there a cleaner way to open and close the edit box?
+
+2013-10-24
 
 Discovered: use Dash app for documentation.
 I ended up reading lots more of the Underscore and Backbone
