@@ -6,12 +6,14 @@ var app = app || {};
     el: '#todo-app',
     
     events: {
-      'keypress #new-todo' : 'updateOnEnter'
+      'keypress #new-todo' : 'updateOnEnter',
+      'click #toggle-all' : 'toggleAll'
     },
     
     initialize: function(){
       this.statsTemplate = $('#stats-template');
       this.$todos = $('#todos');
+      this.$toggleAll = $('#toggle-all');
       this.listenTo(app.todos, 'add', this.addOne);
       this.listenTo(app.todos, 'add', this.render);
       this.listenTo(app.todos, 'change:completed', this.render);
@@ -26,6 +28,13 @@ var app = app || {};
     
     render: function(){
       var completed = app.todos.completed();
+      if(app.todos.length == completed){
+        this.$toggleAll.addClass('completed');
+        this.$toggleAll.attr('checked', 'checked');
+      }else{
+        this.$toggleAll.removeClass('completed');
+        this.$toggleAll.removeAttr('checked');
+      }
       var stats = _.template(this.statsTemplate.html(), {
         'completed': completed,
         'remaining': app.todos.length - completed
@@ -33,9 +42,16 @@ var app = app || {};
       $('#stats').html(stats);
     },
     
-    toggleCompleted: function(e){
+    toggleAll: function(e){
+      this.$toggleAll.toggleClass('completed');
+      var completed = 'completed';
+      if (this.$toggleAll.attr('checked')){
+        completed = '';
+      }
+      var notCompleted = app.todos.where({completed:completed});
+      _.invoke(notCompleted, 'toggleCompleted');
     },
-    
+        
     updateOnEnter: function(e){
       if (e.which == ENTER_KEY){
        var trimmedVal = $('#new-todo').val().trim();

@@ -11,11 +11,15 @@ var app = app || {};
 	    if(this.model.get('completed')){
 	      this.$el.toggleClass('completed');
 	    }
+      this.listenTo(this.model, 'change:completed', this.renderCompleted);
 	  },
+    renderCompleted: function(){
+      this.model.save();
+      this.$el.toggleClass('completed');
+      this.render();
+    },
     toggleCompleted: function(){
       this.model.toggleCompleted();
-	    this.model.save();
-      this.$el.toggleClass('completed');
     },
     delete: function(){
       this.model.destroy();

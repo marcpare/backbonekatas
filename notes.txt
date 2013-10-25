@@ -1,4 +1,31 @@
 
+2013-10-24
+
+Next up:
+
+- Input to select all <-- not working very well at all!
+
+- Filter completed
+- Filter all
+
+Discovered: use Dash app for documentation.
+I ended up reading lots more of the Underscore and Backbone
+docs this way. Very quick and easy to explore different functions
+in the library this way.
+
+When modifying attributes in a Model use get/set, don't do
+it directly (because they're stored in the `attributes`
+property)
+
+Review: I've implemented the `completed` toggling
+in a kind of ugly way. Is there a way to just integrate it
+into the template?
+
+Review: setting the order parameter. I put it in the collection,
+listed to the add event on the collection.
+
+Review: how to trigger a render of app-view on page load?
+
 ***
 
 2013-10-23
@@ -11,7 +38,7 @@ binding.
 
 This is a consequence of _ensureElement
 
-> // If `this.el` is a string, pass it through `$()`, take the first
+// If `this.el` is a string, pass it through `$()`, take the first
 // matching element, and re-assign it to `el`. Otherwise, create
 // an element from the `id`, `className` and `tagName` properties.
 
@@ -26,11 +53,6 @@ Initialize a hash `options || (options = {})`
 - Store in local storage
 
 I was using `sync` instead of `fetch`.
-
-Next up: 
-- fetch completed class
-- delete from local storage
-- ordering counter for todos
 
 
 ***

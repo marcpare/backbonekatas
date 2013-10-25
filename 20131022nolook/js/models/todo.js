@@ -7,6 +7,9 @@ var app = app || {};
       "completed": "",
       "order": -1
     },
+    completed: function(){
+      return this.get('completed') === 'completed';
+    },
     toggleCompleted: function(){
       if(this.get('completed')){
         this.set('completed', '');
