@@ -15,6 +15,7 @@ var app = app || {};
       this.$toggleAll = $('#toggle-all')[0];
       this.listenTo(app.todos, 'add', this.addOne);
       this.listenTo(app.todos, 'all', this.render);
+      this.listenTo(app.todos, 'filter', this.filterAll);
       app.todos.fetch();
     },
     
@@ -45,8 +46,11 @@ var app = app || {};
       return false;
     },
     
-    filterCompleted: function(){
-      console.log('implement filtering completed');
+    filterAll: function(){
+      console.log('doing filter all');
+      app.todos.each(function(todo){
+        todo.trigger('visible');
+      });
     },
     
     toggleAllComplete: function(e){

@@ -1,16 +1,29 @@
 
 ***
 
+2013-10-27
+
+(9:15)
+
+What do you do with the global variable (filter completed) that must trigger an update with a local variable (completed)?
+
+You trigger an event on the model (`visible`). The view listens for it.
+
+Review: each step of the filtering
+
+Instead of calling functions, TodoMVC will trigger events.
+
+Review: how to get the route being called on refresh of page?
+A: The filterAll event doesn't get triggered on page reload. The visibility of the todo needs to be computed in the `render` of the view.
+
+***
+
 2013-10-26
-
-Next up:
-
-- Filter completed
-- Filter all
 
 Review: is selecting the edit box on the close edit event the right way to do it? (or should it be in the initialize event?)
 
 Review: should I listen to 'all' events in todo-view model changes?
+A: yes.
 
 Chrome Inspector doesn't necessarily play nice with `render`. It made it look like additional items were being added to the DOM each time that I refreshed the view. In fact, they weren't.
 
@@ -18,7 +31,6 @@ Need to call `Backbone.history.start();` to get the routing started. From the do
 
 When all of your Routers have been created, and all of the routes are set up properly, call `Backbone.history.start()` to begin monitoring `hashchange` events, and dispatching routes.
 
-Review: how to get the route being called on refresh of page?
 
 ***
 
@@ -36,6 +48,9 @@ Code review, compare to existing TodoMVC implementation
 - Remove a view by listening to the model's destroy event rather than manually removing it when you destroy it
 
 Review: is there a cleaner way to open and close the edit box?
+
+Shortcut for selecting a child element with jquery:
+`this.$input = this.$('.edit');`
 
 2013-10-24
 

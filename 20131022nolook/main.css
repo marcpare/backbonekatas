@@ -1,6 +1,6 @@
 #new-todo { font-size: 26px; width: 400px; }
 .completed { text-decoration: line-through; }
 .todo-view .edit-box{ display: none; }
-
+.hidden { display: none;}
 .edit .edit-box { display: inline-block; }
 .edit .todo-title { display: none; }

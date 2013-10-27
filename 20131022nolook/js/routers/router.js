@@ -1,17 +1,17 @@
 var app = app || {};
 (function(){
-  app.Router = Backbone.Router.extend({
+  var TodoRouter = Backbone.Router.extend({
     routes: {
-      "completed" : 'filterCompleted'
+      "*filter" : 'filterTodos'
     },
-    filterCompleted: function(){
-      if(app.appView){
-        console.log(app.appView);
-        app.appView.filterCompleted.call(app.appView);
-      }
+    filterTodos: function(filter){
+//      if(app.appView){
+        app.todoFilter = filter; /* all, completed */ 
+        app.todos.trigger('filter');
+//      }
     }
   });
   
-  app.router = new app.Router();
+  app.TodoRouter = new TodoRouter();
   Backbone.history.start();
 })();
