@@ -7,26 +7,35 @@ var app = app || {};
       'click .check-completed': 'toggleCompleted',
       'click .delete': 'delete',
       'dblclick .todo-title' : 'openEdit',
-      'blur .edit-box' : 'closeEdit'
+      'blur .edit-box' : 'closeEdit',
+      'keypress .edit-box' : 'closeOnEnter'
     },
 	  initialize: function(){
+      
 	    if(this.model.get('completed')){
 	      this.$el.toggleClass('completed');
 	    }
       this.listenTo(this.model, 'change:completed', this.renderCompleted);
       this.listenTo(this.model, 'destroy', this.remove);
+      this.listenTo(this.model, 'all', this.render);
 	  },
     openEdit: function(){
       this.$el.toggleClass('edit');
       $('.edit-box', this.$el).focus();
     },
+    closeOnEnter: function(e){
+      if(e.which == ENTER_KEY){
+        this.closeEdit.apply(this);
+      }
+    },
     closeEdit: function(){
-      this.$el.toggleClass('edit');
+      var $editBox = $('.edit-box', this.$el);
+      this.model.save({title:$editBox.val()});
+      this.$el.removeClass('edit');
     },
     renderCompleted: function(){
       this.model.save();
       this.$el.toggleClass('completed', this.model.get('completed'));
-      this.render();
     },
     toggleCompleted: function(){
       this.model.toggleCompleted();
@@ -35,8 +44,8 @@ var app = app || {};
       this.model.destroy();
     },
     render: function(){
-      var template = $('#todo-template');
-      this.$el.html(_.template(template.html(), this.model.attributes));
+      var todoTemplate = _.template($('#todo-template').html());
+      this.$el.html(todoTemplate(this.model.attributes));
       return this;
     }
   });

@@ -1,4 +1,26 @@
 
+***
+
+2013-10-26
+
+Next up:
+
+- Filter completed
+- Filter all
+
+Review: is selecting the edit box on the close edit event the right way to do it? (or should it be in the initialize event?)
+
+Review: should I listen to 'all' events in todo-view model changes?
+
+Chrome Inspector doesn't necessarily play nice with `render`. It made it look like additional items were being added to the DOM each time that I refreshed the view. In fact, they weren't.
+
+Need to call `Backbone.history.start();` to get the routing started. From the docs:
+
+When all of your Routers have been created, and all of the routes are set up properly, call `Backbone.history.start()` to begin monitoring `hashchange` events, and dispatching routes.
+
+Review: how to get the route being called on refresh of page?
+
+***
 
 2013-10-25
 
@@ -12,12 +34,6 @@ Code review, compare to existing TodoMVC implementation
 - Using `where` on a Model doesn't make sense because properties are in `attributes`
 - Use `toggleClass` with a Boolean param (instead of trying to keep track of toggled on/toggled off)
 - Remove a view by listening to the model's destroy event rather than manually removing it when you destroy it
-
-Next up:
-
-- Edit a TODO (save the edit)
-- Filter completed
-- Filter all
 
 Review: is there a cleaner way to open and close the edit box?
 

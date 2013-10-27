@@ -45,6 +45,10 @@ var app = app || {};
       return false;
     },
     
+    filterCompleted: function(){
+      console.log('implement filtering completed');
+    },
+    
     toggleAllComplete: function(e){
       var completed = this.$toggleAll.checked;
       app.todos.each(function(todo){
