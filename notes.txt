@@ -3,7 +3,7 @@
 
 2013-10-27
 
-(9:15)
+(9:15 AM)
 
 What do you do with the global variable (filter completed) that must trigger an update with a local variable (completed)?
 
@@ -15,6 +15,16 @@ Instead of calling functions, TodoMVC will trigger events.
 
 Review: how to get the route being called on refresh of page?
 A: The filterAll event doesn't get triggered on page reload. The visibility of the todo needs to be computed in the `render` of the view.
+
+(8:00 PM)
+
+Uses a clearfix: 
+
+<pre>
+#addBook div:after { content: ""; display: block; height: 0; visibility: hidden; clear: both; font-size: 0; line-height: 0; }
+</pre>
+
+
 
 ***
 
