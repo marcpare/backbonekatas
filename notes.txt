@@ -1,3 +1,16 @@
+2013-10-28
+(8:10 AM)
+
+Ctrl+D : Delete character
+Ctrl+K : Delete to end of line
+Ctrl+V : End of document
+Ctrl+W : Selects word
+Ctrl+O : Starts new line
+Ctrl+T : Transpose
+
+The BookLibrary project is a nice followup to TodoMVC because it uses the same module pattern to organize the files, things are very familiar.
+
+Up to: Creating the back-end
 
 ***
 
