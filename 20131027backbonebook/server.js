@@ -34,7 +34,12 @@ app.get('/api', function(request, response){
 
 app.get('/api/books', function(request, response){
   var books = myDB.findAllWithKey('title');
-  return response.send(books);  
+  return response.send(
+    books.map(function(ident){ 
+      var book = myDB.data[ident];
+      book.id = ident;
+      return book; })
+  );
 });
 
 app.get('/api/books/:id', function(request, response){
