@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"></script>
+  <title>Backbone.js Wine Cellar</title>
+  <link rel="stylesheet" href="css/screen.css">
+</head>
+<body>
+
+  <h4>wine app</h4>
+
+  <div id="main">
+    <ul id="wines"></ul>
+  </div>
+  
+  <script type="text/template" id="wine-template">
+  <p><%- title %></p>
+  <p><%- varietal %></p>
+  <p><%- region %></p>
+  </script>
+  
+  <script src="lib/jquery.js"></script>
+  <script src="lib/underscore.js"></script>
+  <script src="lib/backbone.js"></script>
+  <script src="models/wine.js"></script>
+  <script src="collections/wines.js"></script>
+  <script src="views/wine.js"></script>
+  <script src="views/main.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
