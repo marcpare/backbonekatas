@@ -1,7 +1,6 @@
 var app = app || {};
 $(function(){
-  console.log('ready');
-  new app.MainView();
+  app.appView = new app.MainView();
   
   /* Add some dummy wines */
   app.wines.add({title:'taste test wine'});
