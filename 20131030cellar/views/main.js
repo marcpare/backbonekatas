@@ -6,13 +6,11 @@ var app = app || {};
       'gotoPage': 'render'
     },
     initialize: function(){ 
-      console.log('main view ready'); 
       this.listenTo(app.wines, 'add', this.render);
     },
     addWine: function(wine){
     },
     render: function(){
-      console.log('doing a render');
       // render all the wine views
       this.$el.html('');
       app.wines.each(function(wine){
@@ -20,6 +18,9 @@ var app = app || {};
         wineView.render();
         this.$el.append(wineView.el);
       }, this);
+      // paginate control
+      var pager = new app.PaginateControl();
+      pager.render();
     }
   });
 })();

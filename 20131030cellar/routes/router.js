@@ -5,7 +5,6 @@ var app = app || {};
       'wines/page/:page': 'page'
     },
     page: function(index){
-      console.log('triggering paginate');
       app.currentPage = index;
     }
   });

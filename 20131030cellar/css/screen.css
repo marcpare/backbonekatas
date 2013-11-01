@@ -1,0 +1,3 @@
+.pager { float: left; list-style-type: none;}
+.pager a { display: inline-block; width: 40px; height: 40px; background: #ddd; margin: 5px;}
+li.active a { font-weight: bold; background: #aaa;}
