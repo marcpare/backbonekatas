@@ -1,0 +1,70 @@
+Read:
+
+- Backbone.Model (finished)
+- _.defaults
+- _.isNumber
+
+
+Notes:
+
+Backbone.Event
+--------------
+
+
+
+
+Backbone.Model
+--------------
+
+How to do default arguments in Javascript:
+
+`
+function(attributes, options) {
+  options || (options = {});
+}
+`
+
+Safe way to test if something is undefined:
+
+`if (obj[prop] === void 0) obj[prop] = source[prop];`
+
+`void 0` always returns `undefined`
+
+Access the arguments to a function:
+
+`arguments`
+
+(don't use this as a variable name!)
+
+How to check if something is a number: you call `toString` on it
+
+// Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp.
+each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp'], function(name) {
+  _['is' + name] = function(obj) {
+    return toString.call(obj) == '[object ' + name + ']';
+  };
+});
+
+The implementation of `Model.set` explains why you need to call it to change attributes: how else could you trigger the `change` events?
+
+Shortcut to copy `unset` property into options
+
+`_.extend({}, options, {unset: true})`
+
+Initialize a dictionary and give is a value:
+
+`(attrs = {})[key] = val;`
+
+Models will only have one `collection`
+
+Copy an array:
+
+`var args = slice.call(arguments);`
+
+
+
+
+
+
+
+

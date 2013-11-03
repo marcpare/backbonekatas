@@ -1,3 +1,116 @@
+2013-11-01
+
+(8:40 AM - 9:30)
+
+- got paginate to render
+- shows active page
+
+Next up: render list items based on current page
+Review: paginate impl in backbone Cellar
+
+Study plain Javascript? (TODOMVC vanilla?)
+FunctionalJS?
+Javascript design patterns?
+
+Key to studying is learning from others. Studying good code, trying to find things that you don't know that you don't know. (and not looking for solutions to copy+paste)
+
+- Study the BackboneJS source, line by line?
+- Study the call path through the BackboneJS source line by line?
+- How is Thorax implemented?
+- How is StickIt implemented?
+- What problems do you use them for?
+- How are they tested?
+
+2013-10-31
+
+(8:40 AM)
+
+- On page load, why isn't app.appView defined in the route?
+- To get around this, you set a global conditions, like `filter` that is read by the render event of the view that you want to affect.
+- (but why doesn't it trigger?)
+
+Review: how to render a list of items without deleting the contents and doing it again?
+
+- Haha, the example does it exactly the same way as new. Instantiating a new view for each item on a re-render
+
+
+2013-10-30
+
+(6:45 PM)
+
+- Bug in getting a test wine to show: used 'el: 'li'' instead of 'tagName: 'li''
+
+Review: click through each of the BackboneJS examples and see if there are blog posts about the apps.
+
+Review: break down features of Backbone apps in the wild. What is Backbone especially good for?
+
+***
+
+2013-10-29
+(8:20 AM)
+
+Backbone has a default API structure, if you conform to it, you don't have to configure anything.
+
+Review: what does the code to implement this look like in backbonejs?
+
+Asked about this line:
+"The Backbone documentation recommends inserting all models when the page is generated on the server side, rather than fetching them from the client side once the page is loaded. Since this chapter is trying to give you a more complete picture of how to communicate with a server, we will go ahead and ignore that recommendation."
+
+Found it:
+
+<pre>
+Loading Bootstrapped Models 
+When your app first loads, it's common to have a set of initial models that you know you're going to need, in order to render the page. Instead of firing an extra AJAX request to fetch them, a nicer pattern is to have their data already bootstrapped into the page. You can then use reset to populate your collections with the initial data. At DocumentCloud, in the ERB template for the workspace, we do something along these lines:
+
+<script>
+  var accounts = new Backbone.Collection;
+  accounts.reset(<%= @accounts.to_json %>);
+  var projects = new Backbone.Collection;
+  projects.reset(<%= @projects.to_json(:collaborators => true) %>);
+</script>
+You have to escape </ within the JSON string, to prevent javascript injection attacks.
+</pre>
+
+Finished REST backed Backbone example app.
+Didn't really get exposed to all that much code, most of the time was yak-shaving the server, or dealing with data serialization/deserialization.
+
+(7:40PM)
+
+Backbone Koans
+https://github.com/larrymyers/backbone-koans
+
+To serve a folder contents:
+
+`python -m SimpleHTTPServer`
+
+Done at 8:17PM with all tests passing. No cheating needed.
+
+Many of these were easy to deduce from the hints around them without really understanding what was going on.
+
+The cool part of this was seeing the testing harness. May incorporate jasmine tests into my backbone projects.
+
+Next Options
+
+- Read backbone source
+- BackboneJS Wine Cellar
+-- try to do it myself, don't worry about the chrome
+
+- BackboneJS Mobile Flickr Search
+-- try to do it myself, don't worry about the chrome
+
+- BackboneJS Employee Directory (with TopCoat and PhoneGap)
+-- try to do it myself, don't worry about the chrome
+-- Deploy one of these embedded iPhone views on smallredtile
+
+- Thorax and Walmart Labs for TODOMVC
+- Duplicate StackOverflow Careers page
+- Study Soundcloud Mobile App
+- Study Walmart Mobile App
+- NYTimes Stickit
+- Backbone Graphene
+
+***
+
 2013-10-28
 (8:10 AM)
 
@@ -11,6 +124,21 @@ Ctrl+T : Transpose
 The BookLibrary project is a nice followup to TodoMVC because it uses the same module pattern to organize the files, things are very familiar.
 
 Up to: Creating the back-end
+
+(7:40 PM)
+
+I ended up spending most of the time yak-shaving.
+MongoDB doesn't install cleaning with `brew` on Mavericks.
+Ended up porting to microdb in about 10 minutes (vs at least 30 minutes and counting to install MongoDB)
+https://npmjs.org/package/nodejs-microdb
+
+Modify microdb to make the key incremental?
+Or based on a hash of the title?
+Or added by hand?
+
+done.
+
+Next Up: Talking to the server
 
 ***
 
