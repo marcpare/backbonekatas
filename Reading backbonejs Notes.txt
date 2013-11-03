@@ -10,7 +10,16 @@ Notes:
 Backbone.Event
 --------------
 
+The first line of `on` is an adapter. It can a few different API types.
+The `on` function, from the `eventsAPI` function, calls itself in terms of the base API.
 
+`Array.prototype.concat` if you want to add an item OR list into a single list (and not get stuck with that annoying list within a list situation)
+
+Efficient `for` loops:
+`
+for (var i = 0, l = names.length; i < l; i++) {
+}
+`
 
 
 Backbone.Model
