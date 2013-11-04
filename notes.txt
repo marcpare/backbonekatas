@@ -1,3 +1,62 @@
+2013-11-04
+
+Read TodoMVC for ThoraxJS
+
+- There aren't any render() calls except in the stats View, which needs to listen to updates to the Todo collection
+- The templates include the `tag` and view properties (seems to make more sense there)
+
+Reading Thorax README
+
+- Embeddable child views
+- Layout view triggers "lifecycle" events (`ready`, `destroyed`)
+
+In Backbone Fundamentals
+
+- Use `registerViewHelper` for things like a counter for button clicks
+
+`
+{{#on "incremented"}}{{i}}{{/on}}
+{{#button trigger="incremented"}}Add{{/button}}
+`
+
+- Can use multiple collections per view, collections can be nested
+
+e.g. (not tested)
+
+`
+{{#collection kittens}}
+      <h2>{{name}}</h2>
+      <p>Kills:</p>
+      {{#collection miceKilled tag="ul"}}
+        <li>{{name}}</li>
+      {{/collection}}
+{{/collection}}
+`
+
+- Started reading and pinning through the `javascript` projects with the most stars on Github search
+
+Overall, the idea that it's better to understand the fundamental tool (Javascript) than to learn a framework keeps echoing in my head. I am feeling that a real-world project will sometimes benefit from the abstractions in a framework but sometimes not fit.
+
+BackboneJS is awesome because it is so lightweight and simple. On the other hand, it does include limitations already: models can only have one collection, for example.
+
+How should I go about sharpening my Javascript?
+
+- Read chapters of `Effective JS`
+- Read chapters of `The Definitive Guide`
+- Build bite-size apps, focusing on demonstrating each of the areas of knowledge.
+
+My biz dev time is for the larger apps built over the period of weeks.
+Also, my work time is for larger apps. (Naturally, you work in the principles of what you've learned.)
+
+
+2013-11-02
+
+Read Backbone.Model
+Read Backbone.Events
+Read the VanillaJS TodoMVC implementation. It was surprisingly easy to understand. The BackboneJS source uses much more sophisticated patterns (which makes it more dense, takes longer to read). 
+
+Reading VanillaJS TodoMVC felt _easier_ than the BackboneJS source. My primary challenge with BackboneJS was that it wasn't always clear what a shortcut method meant, what `this` was bound to, or when `render` would be called. With vanilla code, it's right there in front of you.
+
 2013-11-01
 
 (8:40 AM - 9:30)
