@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Playing with Advice.js</title>
+  </head>
+  <body>
+    
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="underscore.js"></script>
+    <script type="text/javascript" src="backbone.js"></script>
+    <script type="text/javascript" src="Backbone.Advice/advice.js"></script>
+    
+    <script>
+    function Actor () {}
+    Actor.prototype.announce = function () {
+      console.log('Announce a few things');
+    }
+    
+    var withAdvice = advice.withAdvice;
+    withAdvice.call(Actor.prototype);
+    
+    var actor = new Actor();
+    actor.announce();
+    
+    function withDrama () {
+      this.before('announce', function () {
+        console.log('uh hemm');
+      })
+    }
+    
+    var dramaticActor = new Actor();
+    withDrama.call(dramaticActor);
+    
+    dramaticActor.announce(); // this is the cool part, calling announce() after the mixin
+    
+    </script>
+  </body>
+</html>
+
